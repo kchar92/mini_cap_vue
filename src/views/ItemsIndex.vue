@@ -1,11 +1,14 @@
 <template>
   <div class="items-index">
     <h1>{{ message }}</h1>
-    <div v-for="item in items">
+
+    Search: <input type="text" v-model="searchTerm">
+    <div v-for="item in filterBy(items, searchTerm, 'name')">
       <p>{{ item.name }}</p>
       <p>{{ item.price }}</p>
       <hr>
     </div>
+    
   </div>
 </template>
 
@@ -14,11 +17,15 @@
 
 <script>
 import axios from "axios";
+import Vue2Filters from "vue2-filters";
+
 export default {
+  mixins: [Vue2Filters.mixin],
   data: function() {
     return {
       message: "Welcome to Vue.js!",
-      items: {}
+      items: {},
+      searchTerm: ""
     };
   },
   created: function() {

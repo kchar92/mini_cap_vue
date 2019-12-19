@@ -8,8 +8,10 @@
     </datalist>
     <br>
     <div v-for="item in filterBy(items, searchTerm, 'name')">
+      <p>{{ item.id }}</p>
       <p>{{ item.name }}</p>
       <p>{{ item.price }}</p>
+      <router-link v-bind:to="`/items/${item.id}`">Go to the show page</router-link>
       <hr>
     </div>
     

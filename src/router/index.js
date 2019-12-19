@@ -7,6 +7,7 @@ import Logout from "../views/Logout.vue";
 import ItemsIndex from "../views/ItemsIndex.vue";
 import ItemsNew from "../views/ItemsNew.vue";
 import ItemsShow from "../views/ItemsShow.vue";
+import ItemsEdit from '../views/ItemsEdit.vue';
 
 Vue.use(VueRouter);
 
@@ -53,6 +54,11 @@ const routes = [
     path: "/items/:id",
     name: "items-show",
     component: ItemsShow
+  },
+  {
+    path: "/items/:id/edit",
+    name: "items-edit",
+    component: ItemsEdit
   }
 ];
 

@@ -3,7 +3,8 @@
     <p>{{ item.name }}</p>
     <p>{{ item.price }}</p>
     <p>{{ item.description }}</p>
-    <router-link to="/items">Back to all items</router-link>
+    <router-link to="/items">Back to all items</router-link> |
+    <router-link v-bind:to="`/items/${item.id}/edit`">Edit item</router-link>
     <hr>
   </div>
 </template>

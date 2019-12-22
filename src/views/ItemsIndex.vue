@@ -7,7 +7,13 @@
       <option v-for="item in items"> {{ item.name }}</option>  
     </datalist>
     <br>
-    <div v-for="item in filterBy(items, searchTerm, 'name')" v-bind:class="{selected: item.selected}">
+
+    <button v-on:click="setSortAttribute('name')">Sort by name</button>
+    <button v-on:click="setSortAttribute('id')">Sort by id</button>
+
+
+    <!-- <div v-for="item in filterBy(items, searchTerm, 'name')" v-bind:class="{selected: item.selected}"> -->
+    <div v-for="item in orderBy(items, sortAttribute)">
       <button v-on:click="selectItem(item)">Select Item</button>
       <p>{{ item.id }}</p>
       <p>{{ item.name }}</p>
@@ -37,7 +43,8 @@ export default {
     return {
       message: "Welcome to Vue.js!",
       items: {},
-      searchTerm: ""
+      searchTerm: "",
+      sortAttribute: ""
     };
   },
   created: function() {
@@ -51,6 +58,9 @@ export default {
       console.log("item selected");
       item.selected = !item.selected;
       console.log(item);
+    },
+    setSortAttribute: function(theAttribute) {
+      this.sortAttribute = theAttribute;
     }
   }
 };

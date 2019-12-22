@@ -11,16 +11,16 @@
     <button v-on:click="setSortAttribute('name')">Sort by name</button>
     <button v-on:click="setSortAttribute('id')">Sort by id</button>
 
-
-    <!-- <div v-for="item in filterBy(items, searchTerm, 'name')" v-bind:class="{selected: item.selected}"> -->
-    <div v-for="item in orderBy(items, sortAttribute)">
-      <button v-on:click="selectItem(item)">Select Item</button>
-      <p>{{ item.id }}</p>
-      <p>{{ item.name }}</p>
-      <p>{{ item.price }}</p>
-      <router-link v-bind:to="`/items/${item.id}`">Go to the show page</router-link>
-      <hr>
-    </div>
+    <transition-group appear enter-active-class="animated tada" leave-active-class="animated bounceOutRight">
+      <div v-for="item in orderBy(filterBy(items, searchTerm, 'name'), sortAttribute, 1)" v-bind:class="{selected: item.selected}" v-bind:key="item.id">
+        <button v-on:click="selectItem(item)">Select Item</button>
+        <p>{{ item.id }}</p>
+        <p>{{ item.name }}</p>
+        <p>{{ item.price }}</p>
+        <router-link v-bind:to="`/items/${item.id}`">Go to the show page</router-link>
+        <hr>
+      </div>
+    </transition-group>
     
   </div>
 </template>

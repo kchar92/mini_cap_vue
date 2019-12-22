@@ -7,7 +7,8 @@
       <option v-for="item in items"> {{ item.name }}</option>  
     </datalist>
     <br>
-    <div v-for="item in filterBy(items, searchTerm, 'name')">
+    <div v-for="item in filterBy(items, searchTerm, 'name')" v-bind:class="{selected: item.selected}">
+      <button v-on:click="selectItem(item)">Select Item</button>
       <p>{{ item.id }}</p>
       <p>{{ item.name }}</p>
       <p>{{ item.price }}</p>
@@ -19,6 +20,11 @@
 </template>
 
 <style>
+.selected {
+  color: white;
+  background-color: steelBlue;
+  transition: background-color 1s ease;
+}
 </style>
 
 <script>
@@ -36,9 +42,16 @@ export default {
   },
   created: function() {
     axios.get("/api/items").then(response => {
+      // console.log(response.data);
       this.items = (response.data);
     });
   },
-  methods: {}
+  methods: {
+    selectItem: function(item) {
+      console.log("item selected");
+      item.selected = !item.selected;
+      console.log(item);
+    }
+  }
 };
 </script>
